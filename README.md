@@ -1,4 +1,4 @@
-[![Latest release](https://img.shields.io/github/v/release/alexmaietta/apollo-astronaut-asset?label=release)](https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/alexmaietta/apollo-astronaut-asset?label=release&sort=semver)](https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest)
 [![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 [![Additions: CC BY 4.0](https://img.shields.io/badge/rig%20%26%20physics-CC%20BY%204.0-lightgrey.svg)](assets/LICENSE)
 [![Source asset: NVIDIA Omniverse](https://img.shields.io/badge/source%20asset-NVIDIA%20Omniverse-76b900.svg?logo=nvidia&logoColor=white)](https://docs.omniverse.nvidia.com/composer/latest/prod_content/mount-content.html#astronaut)
