@@ -9,7 +9,7 @@
 def SkelRoot "astronaut" (
     assetInfo = {
         string name = "astronaut"
-        string version = "1.0.0"
+        string version = "1.0.1"
     }
     kind = "component"
     prepend references = @./geometries.usd@</astronaut>

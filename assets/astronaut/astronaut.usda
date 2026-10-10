@@ -6,7 +6,7 @@
             string asset_license = "CC-BY-4.0 (rig, physics, additions); NVIDIA's Omniverse Astronaut mesh and textures under NVIDIA's terms"
             string asset_name = "astronaut"
             string asset_type = "character"
-            string asset_version = "1.0.0"
+            string asset_version = "1.0.1"
             string author = "Alex Maietta"
             string category = "humanoid"
             string description = "Rigged Apollo 11 A7L astronaut (NVIDIA Omniverse Astronaut sample): UsdSkel with OpenXR joints, shoulder correctives, and 20-DoF physics hands with A7L glove stiffness."
@@ -21,7 +21,7 @@
         }
         string asset_name = "astronaut"
         string asset_type = "character"
-        string asset_version = "1.0.0"
+        string asset_version = "1.0.1"
         string creator = "astronaut pipeline (scripts/package_simready.py)"
         string source_file = "build/astronaut_rig.usd (scripts/build_rig.py, scripts/correctives.py)"
         string usd_date_generated = "2026-10-10"
@@ -36,7 +36,7 @@
 def SkelRoot "astronaut" (
     assetInfo = {
         string name = "astronaut"
-        string version = "1.0.0"
+        string version = "1.0.1"
     }
     prepend references = @./payloads/base.usda@
     variants = {

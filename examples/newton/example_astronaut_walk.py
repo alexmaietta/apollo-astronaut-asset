@@ -216,29 +216,10 @@ class Example(PolicyExample):
             "the astronaut did not walk"
 
     def save_animation(self, path, fps):
-        from pxr import Gf, Usd, UsdGeom, UsdSkel, Vt
-        rig = self.astro.rig
-        stage = Usd.Stage.CreateNew(path)
-        UsdGeom.SetStageUpAxis(stage, "Z")
-        UsdGeom.SetStageMetersPerUnit(stage, 1.0)
-        stage.SetTimeCodesPerSecond(fps)
-        stage.SetStartTimeCode(0)
-        stage.SetEndTimeCode(len(self.frames) - 1)
-        root = stage.DefinePrim("/astronaut")
-        root.GetReferences().AddReference(os.path.relpath(RIG, os.path.dirname(os.path.abspath(path))))
-        root.GetVariantSet("Physics").SetVariantSelection("none")  # animation only
-        stage.SetDefaultPrim(root)
-        anim = UsdSkel.Animation.Define(stage, "/astronaut/Skeleton/WalkAnim")
-        anim.CreateJointsAttr(UsdSkel.Skeleton(stage.GetPrimAtPath("/astronaut/Skeleton")).GetJointsAttr().Get())
-        for f, W in enumerate(self.frames):
-            L = rig.local_from_world(W)
-            q = R.from_matrix(L[:, :3, :3]).as_quat()  # xyzw
-            anim.GetTranslationsAttr().Set(Vt.Vec3fArray.FromNumpy(L[:, :3, 3].astype(np.float32)), f)
-            anim.GetRotationsAttr().Set(Vt.QuatfArray([Gf.Quatf(float(w), float(x), float(y), float(z)) for x, y, z, w in q]), f)
-        anim.GetScalesAttr().Set(Vt.Vec3hArray([Gf.Vec3h(1, 1, 1)] * len(rig.names)))
-        UsdSkel.BindingAPI.Apply(stage.GetPrimAtPath("/astronaut/Skeleton")).CreateAnimationSourceRel().SetTargets([anim.GetPath()])
-        stage.GetRootLayer().Save()
-        print("astronaut: wrote", path, len(self.frames), "frames")
+        """UsdSkel animation of the astronaut with the shoulder-corrective weights (scripts/skel_animation.py)."""
+        from skel_animation import write_animation
+        write_animation(self.astro.rig, self.frames, path, fps, asset=RIG)
+        print("astronaut: wrote", path, len(self.frames), "frames (joints + corrective blend-shape weights)")
 
     @staticmethod
     def create_parser():

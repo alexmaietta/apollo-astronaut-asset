@@ -8,7 +8,8 @@ shoulders inside the A7L range), and the GPU skinning writes the vertices exactl
 
     python examples/newton/utils/record_walk.py [--out build/walk] [--subject 35 --trial 1 --start 26 --end 283]
 
-Writes <out>/walk.npz (frame times, hips path, mesh layout) and <out>/points_<frame>.npy. Render with
+Writes <out>/walk.npz (frame times, hips path, mesh layout), <out>/points_<frame>.npy and <out>/walk_anim.usda (a
+UsdSkel animation on the asset with the corrective weights, for Omniverse / usdview). Render with
 scripts/render_hero.py --walk. Motion data: CMU Graphics Lab Motion Capture Database (http://mocap.cs.cmu.edu),
 downloaded to build/mocap/ and not redistributed.
 """
@@ -134,7 +135,7 @@ def main():
     rig = astro.rig
     rt = MocapRetarget(rig, P)
     fbik = FullBodyIK(rig, device)
-    frames, hips = [], []
+    frames, hips, Ws = [], [], []
     for f in range(a.start, a.end, a.every):
         W = rt.pose(f)
         fbik.set_reference(W, seed=True)  # start at the retarget; the IK only corrects it
@@ -145,7 +146,10 @@ def main():
         np.save(os.path.join(a.out, f"points_{f:04d}.npy"), astro.points.numpy())
         frames.append(f)
         hips.append(W[rig.index["Hips"], :3, 3])
+        Ws.append(W)
     hips = np.array(hips)
+    from skel_animation import write_animation
+    write_animation(rig, Ws, os.path.join(a.out, "walk_anim.usda"), fps=cmu_mocap.FPS / a.every)
     np.savez(os.path.join(a.out, "walk.npz"), frames=np.array(frames), times=(np.array(frames) - a.start) / cmu_mocap.FPS,
              hips=hips, scale=rt.scale, stride=(rt.src["hips"][a.end] - rt.src["hips"][a.start]) * rt.scale,
              mesh_names=np.array([m["name"] for m in rig.meshes]), mesh_counts=np.array([len(m["P"]) for m in rig.meshes]))
