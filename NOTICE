@@ -1,0 +1,10 @@
+Apollo astronaut asset
+Copyright 2026 Alex Maietta
+
+This repository builds on NVIDIA's Omniverse Astronaut sample (https://docs.omniverse.nvidia.com/composer/latest/prod_content/mount-content.html#astronaut), Copyright NVIDIA Corporation. Its mesh, MDL materials and textures (source/, and the geometry and textures carried into assets/) remain under NVIDIA's terms for Omniverse content (NVIDIA Omniverse License Agreement) and are not relicensed by this project.
+
+The code in this repository (scripts/, examples/, pipeline.sh) is licensed under the Apache License, Version 2.0 (LICENSE). The additions to the asset (skeleton, skin weights, corrective blend shapes, physics hands, glove parameters, body colliders; assets/ and data/) and the renders (docs/images/) are licensed under Creative Commons Attribution 4.0 International (assets/LICENSE).
+
+The Newton examples (examples/newton/) are based on Newton's examples (https://github.com/newton-physics/newton), Copyright The Newton Developers, Apache License 2.0.
+
+The walk animation in docs/images/walk.gif is retargeted from the CMU Graphics Lab Motion Capture Database (http://mocap.cs.cmu.edu), created with funding from NSF EIA-0196217. The raw motion data is not redistributed.

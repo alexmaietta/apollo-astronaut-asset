@@ -1,0 +1,6 @@
+build/
+renders/
+.venv/
+__pycache__/
+imgui.ini
+data/user_poses.json

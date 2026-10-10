@@ -1,0 +1,937 @@
+#usda 1.0
+(
+    defaultPrim = "astronaut"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    subLayers = [
+        @./physics.usda@
+    ]
+    upAxis = "Z"
+)
+
+over "astronaut"
+{
+    over "Physics"
+    {
+        over "LeftHandIndexProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "LeftHandIndexProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandIndexProximal_abd>
+        }
+
+        over "LeftHandIndexProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "LeftHandIndexProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandIndexProximal_flex>
+        }
+
+        over "LeftHandIndexIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "LeftHandIndexIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandIndexIntermediate_flex>
+        }
+
+        over "LeftHandIndexDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "LeftHandIndexDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandIndexDistal_flex>
+        }
+
+        over "LeftHandMiddleProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "LeftHandMiddleProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandMiddleProximal_abd>
+        }
+
+        over "LeftHandMiddleProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "LeftHandMiddleProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandMiddleProximal_flex>
+        }
+
+        over "LeftHandMiddleIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "LeftHandMiddleIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandMiddleIntermediate_flex>
+        }
+
+        over "LeftHandMiddleDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "LeftHandMiddleDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandMiddleDistal_flex>
+        }
+
+        over "LeftHandRingProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "LeftHandRingProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandRingProximal_abd>
+        }
+
+        over "LeftHandRingProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "LeftHandRingProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandRingProximal_flex>
+        }
+
+        over "LeftHandRingIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "LeftHandRingIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandRingIntermediate_flex>
+        }
+
+        over "LeftHandRingDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "LeftHandRingDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandRingDistal_flex>
+        }
+
+        over "LeftHandLittleProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "LeftHandLittleProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandLittleProximal_abd>
+        }
+
+        over "LeftHandLittleProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "LeftHandLittleProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandLittleProximal_flex>
+        }
+
+        over "LeftHandLittleIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "LeftHandLittleIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandLittleIntermediate_flex>
+        }
+
+        over "LeftHandLittleDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "LeftHandLittleDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandLittleDistal_flex>
+        }
+
+        over "LeftHandThumbMetacarpal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "LeftHandThumbMetacarpal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 2.5
+            custom double mjc:forceRange:min = -2.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandThumbMetacarpal_abd>
+        }
+
+        over "LeftHandThumbMetacarpal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.35
+        }
+
+        def MjcActuator "LeftHandThumbMetacarpal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandThumbMetacarpal_flex>
+        }
+
+        over "LeftHandThumbProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "LeftHandThumbProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandThumbProximal_flex>
+        }
+
+        over "LeftHandThumbDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "LeftHandThumbDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/LeftHandThumbDistal_flex>
+        }
+
+        over "RightHandIndexProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "RightHandIndexProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandIndexProximal_abd>
+        }
+
+        over "RightHandIndexProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "RightHandIndexProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandIndexProximal_flex>
+        }
+
+        over "RightHandIndexIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "RightHandIndexIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandIndexIntermediate_flex>
+        }
+
+        over "RightHandIndexDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "RightHandIndexDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandIndexDistal_flex>
+        }
+
+        over "RightHandMiddleProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "RightHandMiddleProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandMiddleProximal_abd>
+        }
+
+        over "RightHandMiddleProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "RightHandMiddleProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandMiddleProximal_flex>
+        }
+
+        over "RightHandMiddleIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "RightHandMiddleIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandMiddleIntermediate_flex>
+        }
+
+        over "RightHandMiddleDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "RightHandMiddleDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandMiddleDistal_flex>
+        }
+
+        over "RightHandRingProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "RightHandRingProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandRingProximal_abd>
+        }
+
+        over "RightHandRingProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "RightHandRingProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandRingProximal_flex>
+        }
+
+        over "RightHandRingIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "RightHandRingIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandRingIntermediate_flex>
+        }
+
+        over "RightHandRingDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "RightHandRingDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandRingDistal_flex>
+        }
+
+        over "RightHandLittleProximal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.25
+        }
+
+        def MjcActuator "RightHandLittleProximal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1
+            custom double mjc:forceRange:min = -1
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandLittleProximal_abd>
+        }
+
+        over "RightHandLittleProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "RightHandLittleProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandLittleProximal_flex>
+        }
+
+        over "RightHandLittleIntermediate_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "RightHandLittleIntermediate_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandLittleIntermediate_flex>
+        }
+
+        over "RightHandLittleDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "RightHandLittleDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandLittleDistal_flex>
+        }
+
+        over "RightHandThumbMetacarpal_abd" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.3
+        }
+
+        def MjcActuator "RightHandThumbMetacarpal_abd_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 2.5
+            custom double mjc:forceRange:min = -2.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandThumbMetacarpal_abd>
+        }
+
+        over "RightHandThumbMetacarpal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.004
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.35
+        }
+
+        def MjcActuator "RightHandThumbMetacarpal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 3
+            custom double mjc:forceRange:min = -3
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandThumbMetacarpal_flex>
+        }
+
+        over "RightHandThumbProximal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.002
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.15
+        }
+
+        def MjcActuator "RightHandThumbProximal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 1.5
+            custom double mjc:forceRange:min = -1.5
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandThumbProximal_flex>
+        }
+
+        over "RightHandThumbDistal_flex" (
+            delete apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+            prepend apiSchemas = ["MjcJointAPI"]
+        )
+        {
+            custom double mjc:armature = 0.0005
+            custom double mjc:damping = 0.001
+            custom double mjc:springref = 0
+            custom double mjc:stiffness = 0.08
+        }
+
+        def MjcActuator "RightHandThumbDistal_flex_servo"
+        {
+            custom double[] mjc:biasPrm = [0, -2.5, -0.05, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:biasType = "affine"
+            custom token mjc:forceLimited = "true"
+            custom double mjc:forceRange:max = 0.7
+            custom double mjc:forceRange:min = -0.7
+            custom double[] mjc:gainPrm = [2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            custom token mjc:gainType = "fixed"
+            custom rel mjc:target = </astronaut/Physics/RightHandThumbDistal_flex>
+        }
+    }
+}
+

@@ -1,0 +1,24 @@
+#usda 1.0
+(
+    defaultPrim = "astronaut"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def SkelRoot "astronaut" (
+    assetInfo = {
+        string name = "astronaut"
+        string version = "1.0.0"
+    }
+    kind = "component"
+    prepend references = @./geometries.usd@</astronaut>
+)
+{
+    def Scope "Looks" (
+        prepend references = @./materials.usda@</Looks>
+    )
+    {
+    }
+}
+

@@ -1,0 +1,1223 @@
+#usda 1.0
+(
+    defaultPrim = "Looks"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Scope "Looks"
+{
+    def Material "Body"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Body/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Body/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Body/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Body/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.8, 0.79, 0.75)
+            color3f inputs:diffuseColor.connect = </Looks/Body/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Body/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Body/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.8
+            float inputs:roughness.connect = </Looks/Body/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Body/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Body/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Body/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Body_MDL/astronaut_04_jackletS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Body/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Pants"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Pants/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Pants/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Pants/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Pants/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.8, 0.79, 0.75)
+            color3f inputs:diffuseColor.connect = </Looks/Pants/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Pants/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Pants/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.8
+            float inputs:roughness.connect = </Looks/Pants/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Pants/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Pants/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Pants/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Pants_MDL/astronaut_04_pantsS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Pants/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Gloves"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Gloves/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Gloves/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Gloves/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Gloves/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.55, 0.57, 0.6)
+            color3f inputs:diffuseColor.connect = </Looks/Gloves/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Gloves/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Gloves/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.55
+            float inputs:roughness.connect = </Looks/Gloves/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Gloves/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Gloves/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Gloves/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Gloves_MDL/astronaut_04_GlovesS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Gloves/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Boots"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Boots/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Boots/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Boots/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Boots/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.8, 0.79, 0.76)
+            color3f inputs:diffuseColor.connect = </Looks/Boots/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Boots/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Boots/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.75
+            float inputs:roughness.connect = </Looks/Boots/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Boots/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Boots/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Boots/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Boots_MDL/astronaut_04_bootsS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Boots/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Helmet"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Helmet/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Helmet/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Helmet/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Helmet/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            bool inputs:enable_ORM_texture = 1 (
+                customData = {
+                    bool default = 0
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Enable ORM Texture"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            asset inputs:ORM_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_OcclusionRoughnessMetallic.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "ORM Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.85, 0.85, 0.83)
+            color3f inputs:diffuseColor.connect = </Looks/Helmet/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Helmet/ORMTex.outputs:b>
+            normal3f inputs:normal.connect = </Looks/Helmet/NormalTex.outputs:rgb>
+            float inputs:occlusion.connect = </Looks/Helmet/ORMTex.outputs:r>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.25
+            float inputs:roughness.connect = </Looks/Helmet/ORMTex.outputs:g>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Helmet_MDL/Helmet_m_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Helmet/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Helmet_MDL/Helmet_m_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Helmet/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "ORMTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Helmet_MDL/Helmet_m_OcclusionRoughnessMetallic.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Helmet/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:b
+            float outputs:g
+            float outputs:r
+        }
+    }
+
+    def Material "HelmetVisor"
+    {
+        token outputs:mdl:displacement.connect = </Looks/HelmetVisor/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/HelmetVisor/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/HelmetVisor/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/HelmetVisor/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniGlass.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniGlass"
+            float inputs:depth = 0.01 (
+                customData = {
+                    float default = 0.001
+                    dictionary range = {
+                        float max = 1000
+                        float min = 0
+                    }
+                }
+                displayGroup = "Color"
+                displayName = "Volume Absorption Scale"
+            )
+            bool inputs:enable_opacity = 0 (
+                customData = {
+                    bool default = 0
+                }
+                displayGroup = "Opacity"
+                displayName = "Enable Opacity"
+            )
+            float inputs:frosting_roughness = 0 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Roughness"
+                displayName = "Glass Roughness"
+            )
+            color3f inputs:glass_color = (1, 0.55696124, 0) (
+                customData = {
+                    float3 default = (1, 1, 1)
+                    dictionary range = {
+                        float3 max = (0, 0, 0)
+                        float3 min = (0, 0, 0)
+                    }
+                }
+                displayGroup = "Color"
+                displayName = "Glass Color"
+            )
+            asset inputs:glass_color_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Color"
+                displayName = "Glass Color Texture"
+            )
+            float inputs:glass_ior = 4 (
+                customData = {
+                    float default = 1.491
+                    dictionary range = {
+                        float max = 4
+                        float min = 1
+                    }
+                }
+                displayGroup = "Refraction"
+                displayName = "Glass IOR"
+            )
+            asset inputs:normal_map_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map Texture"
+            )
+            asset inputs:reflection_color_texture = @./Textures/Materials/Helmet_MDL/Helmet_m_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflection"
+                displayName = "Reflection Color Texture"
+            )
+            asset inputs:roughness_texture = @@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Roughness"
+                displayName = "Roughness Texture"
+            )
+            bool inputs:thin_walled = 0 (
+                customData = {
+                    bool default = 0
+                }
+                displayGroup = "Refraction"
+                displayName = "Thin Walled"
+            )
+            bool inputs:use_glass_color_texture = 1 (
+                customData = {
+                    bool default = 0
+                }
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (1, 0.77, 0.34)
+            float inputs:metallic = 1
+            float inputs:opacity = 1
+            float inputs:roughness = 0.05
+            token outputs:surface
+        }
+    }
+
+    def Material "Backpack"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Backpack/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Backpack/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Backpack/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Backpack/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Backpack_MDL/astronaut_04_backpacktopS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.82, 0.81, 0.77)
+            color3f inputs:diffuseColor.connect = </Looks/Backpack/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Backpack/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Backpack/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.85
+            float inputs:roughness.connect = </Looks/Backpack/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Backpack/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_MDL/astronaut_04_backpackLowS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_MDL/astronaut_04_backpacktopS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Backpack_top"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Backpack_top/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Backpack_top/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Backpack_top/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Backpack_top/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            asset inputs:normalmap_texture = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Normal.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Normal"
+                displayName = "Normal Map"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.82, 0.81, 0.77)
+            color3f inputs:diffuseColor.connect = </Looks/Backpack_top/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Backpack_top/MetallicTex.outputs:r>
+            normal3f inputs:normal.connect = </Looks/Backpack_top/NormalTex.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.7
+            float inputs:roughness.connect = </Looks/Backpack_top/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Backpack_top/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "NormalTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-1, -1, -1, 0)
+            asset inputs:file = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Normal.png@
+            float4 inputs:scale = (2, 2, 2, 1)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack_top/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack_top/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Backpack_top_MDL/astronaut_04_backpacktopS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Backpack_top/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "Accessories"
+    {
+        token outputs:mdl:displacement.connect = </Looks/Accessories/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/Accessories/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/Accessories/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/Accessories/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+            asset inputs:diffuse_texture = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_BaseColor.png@ (
+                colorSpace = "auto"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Albedo"
+                displayName = "Albedo Map"
+            )
+            asset inputs:metallic_texture = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_Metalness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map"
+            )
+            float inputs:metallic_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Metallic Map Influence"
+            )
+            float inputs:reflection_roughness_texture_influence = 1 (
+                customData = {
+                    float default = 0
+                    dictionary range = {
+                        float max = 1
+                        float min = 0
+                    }
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map Influence"
+            )
+            asset inputs:reflectionroughness_texture = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_Roughness.png@ (
+                colorSpace = "raw"
+                customData = {
+                    asset default = @@
+                }
+                displayGroup = "Reflectivity"
+                displayName = "Roughness Map"
+            )
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.7, 0.7, 0.68)
+            color3f inputs:diffuseColor.connect = </Looks/Accessories/BaseColorTex.outputs:rgb>
+            float inputs:metallic = 0
+            float inputs:metallic.connect = </Looks/Accessories/MetallicTex.outputs:r>
+            float inputs:opacity = 1
+            float inputs:roughness = 0.5
+            float inputs:roughness.connect = </Looks/Accessories/RoughnessTex.outputs:r>
+            token outputs:surface
+        }
+
+        def Shader "stReader"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "BaseColorTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_BaseColor.png@
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Looks/Accessories/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "RoughnessTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_Roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Accessories/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+
+        def Shader "MetallicTex"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @./Textures/Materials/Accessories_MDL/astronaut_04_accessoriesS_Metalness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Looks/Accessories/stReader.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float outputs:r
+        }
+    }
+
+    def Material "WatchGaugeGlass"
+    {
+        token outputs:mdl:displacement.connect = </Looks/WatchGaugeGlass/Shader.outputs:out>
+        token outputs:mdl:surface.connect = </Looks/WatchGaugeGlass/Shader.outputs:out>
+        token outputs:mdl:volume.connect = </Looks/WatchGaugeGlass/Shader.outputs:out>
+        token outputs:surface.connect = </Looks/WatchGaugeGlass/PreviewSurface.outputs:surface>
+
+        def Shader "Shader"
+        {
+            uniform token info:implementationSource = "sourceAsset"
+            uniform asset info:mdl:sourceAsset = @OmniGlass.mdl@
+            uniform token info:mdl:sourceAsset:subIdentifier = "OmniGlass"
+            token outputs:out
+        }
+
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.9, 0.92, 0.95)
+            float inputs:metallic = 0
+            float inputs:opacity = 0.2
+            float inputs:roughness = 0.02
+            token outputs:surface
+        }
+    }
+}
+

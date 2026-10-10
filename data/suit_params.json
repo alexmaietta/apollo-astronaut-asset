@@ -1,0 +1,128 @@
+{
+  "_doc": "Tunable A7L EV glove / hand physics parameters. Angles in degrees, torques in N*m. Stiffness values are the pressurized-glove passive spring at reference_pressure_psi and scale linearly with pressure_psi (0 = unpressurized). The defaults are engineering estimates for a pressurized EVA glove (order of tenths of a N*m to hold a finger joint deflected) and are meant to be tuned against measurements or operator feel.",
+  "pressure_psi": 3.7,
+  "reference_pressure_psi": 3.7,
+  "glove_neutral": "bind",
+  "rom_scale": 0.85,
+  "joints": {
+    "mcp_flex": {
+      "limits_deg": [
+        -15,
+        90
+      ],
+      "suit_stiffness_nm_per_rad": 0.3,
+      "suit_damping_nms_per_rad": 0.004,
+      "max_torque_nm": 3.0
+    },
+    "mcp_abd": {
+      "limits_deg": [
+        -20,
+        20
+      ],
+      "suit_stiffness_nm_per_rad": 0.25,
+      "suit_damping_nms_per_rad": 0.004,
+      "max_torque_nm": 1.0
+    },
+    "pip_flex": {
+      "limits_deg": [
+        0,
+        105
+      ],
+      "suit_stiffness_nm_per_rad": 0.15,
+      "suit_damping_nms_per_rad": 0.002,
+      "max_torque_nm": 1.5
+    },
+    "dip_flex": {
+      "limits_deg": [
+        0,
+        80
+      ],
+      "suit_stiffness_nm_per_rad": 0.08,
+      "suit_damping_nms_per_rad": 0.001,
+      "max_torque_nm": 0.7
+    },
+    "thumb_cmc_flex": {
+      "limits_deg": [
+        -20,
+        50
+      ],
+      "suit_stiffness_nm_per_rad": 0.35,
+      "suit_damping_nms_per_rad": 0.004,
+      "max_torque_nm": 3.0
+    },
+    "thumb_cmc_abd": {
+      "limits_deg": [
+        -10,
+        60
+      ],
+      "suit_stiffness_nm_per_rad": 0.3,
+      "suit_damping_nms_per_rad": 0.004,
+      "max_torque_nm": 2.5
+    },
+    "thumb_mcp_flex": {
+      "limits_deg": [
+        -10,
+        60
+      ],
+      "suit_stiffness_nm_per_rad": 0.15,
+      "suit_damping_nms_per_rad": 0.002,
+      "max_torque_nm": 1.5
+    },
+    "thumb_ip_flex": {
+      "limits_deg": [
+        -15,
+        80
+      ],
+      "suit_stiffness_nm_per_rad": 0.08,
+      "suit_damping_nms_per_rad": 0.001,
+      "max_torque_nm": 0.7
+    }
+  },
+  "drive": {
+    "_doc": "teleop position servo standing in for the operator's muscles: target = tracked angle, torque clipped to max_torque_nm. A moderate gain maps full operator closure to a firm (not maximal) grip.",
+    "kp_nm_per_rad": 2.5,
+    "kd_nms_per_rad": 0.05
+  },
+  "armature": 0.0005,
+  "mass": {
+    "hand_and_glove_kg": 0.9,
+    "_doc": "distributed over the hand bodies by collider volume"
+  },
+  "contact": {
+    "static_friction": 1.0,
+    "dynamic_friction": 0.9,
+    "fingertip_friction": 1.2,
+    "contact_stiffness": 2500.0,
+    "contact_damping": 100.0,
+    "torsional_friction": 0.005,
+    "rolling_friction": 0.0001
+  },
+  "collider_radius_scale": 1.0,
+  "body_rom": {
+    "_doc": "Pressurized A7L range-of-motion limits used by the IK (degrees). Shoulder: maximum upper-arm elevation from hanging straight down, per swing direction relative to the chest (forward raise, backward reach, side raise, reach across the body), blended elliptically between them. Elbow/knee: maximum bend. Engineering estimates for a 3.7 psi A7L; tune against suit mobility data.",
+    "shoulder": {
+      "flexion_deg": 120,
+      "extension_deg": 40,
+      "abduction_deg": 100,
+      "adduction_deg": 35
+    },
+    "elbow": {
+      "flexion_deg": 130
+    },
+    "hip": {
+      "flexion_deg": 95,
+      "extension_deg": 20,
+      "abduction_deg": 35,
+      "adduction_deg": 15
+    },
+    "knee": {
+      "flexion_deg": 120
+    },
+    "spine": {
+      "flexion_deg": 30,
+      "extension_deg": 10,
+      "lateral_deg": 15,
+      "twist_deg": 25
+    }
+  }
+}

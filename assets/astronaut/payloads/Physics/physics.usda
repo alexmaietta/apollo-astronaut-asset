@@ -1,0 +1,2389 @@
+#usda 1.0
+(
+    defaultPrim = "astronaut"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "astronaut"
+{
+    def Scope "Physics"
+    {
+        def Material "GloveMaterial" (
+            prepend apiSchemas = ["PhysicsMaterialAPI", "NewtonMaterialAPI"]
+        )
+        {
+            custom float newton:contactDamping = 100
+            custom float newton:contactStiffness = 2500
+            custom float newton:rollingFriction = 0.0001
+            custom float newton:torsionalFriction = 0.005
+            float physics:dynamicFriction = 0.9
+            float physics:restitution = 0
+            float physics:staticFriction = 1
+        }
+
+        def Material "FingertipMaterial" (
+            prepend apiSchemas = ["PhysicsMaterialAPI", "NewtonMaterialAPI"]
+        )
+        {
+            custom float newton:contactDamping = 100
+            custom float newton:contactStiffness = 2500
+            custom float newton:rollingFriction = 0.0001
+            custom float newton:torsionalFriction = 0.005
+            float physics:dynamicFriction = 1.08
+            float physics:restitution = 0
+            float physics:staticFriction = 1.2
+        }
+
+        def PhysicsFixedJoint "LeftWristMount"
+        {
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandWrist>
+            point3f physics:localPos0 = (0.01, 0.36, 0.966)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.9767084, 0.072728954, -0.195976, 0.048420403)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "LeftHandIndexProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandWrist>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandIndexProximalBase>
+            point3f physics:localPos0 = (0.024911774, -0.00246183, -0.097971134)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.7054493, 0.19365714, 0.08754464, 0.6761465)
+            quatf physics:localRot1 = (0.7046234, 0.05921064, 0.05921064, 0.7046234)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandIndexProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -9.614644211430434
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandIndexProximalBase>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandIndexProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-2.3041002e-18, -9.789846e-18, 0.14085533, 0.99003017)
+            quatf physics:localRot1 = (-2.3041002e-18, -9.789846e-18, 0.14085533, 0.99003017)
+            float physics:lowerLimit = -3.1353557
+            float physics:upperLimit = 86.11465
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandIndexIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 27.907681424488914
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandIndexProximal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandIndexIntermediate>
+            point3f physics:localPos0 = (0, 0, -0.037768506)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.068238005, -0.02137882, 0.12806244, 0.9891848)
+            quatf physics:localRot1 = (-1.2398349e-17, -7.745734e-18, -0.1136714, 0.9935184)
+            float physics:lowerLimit = -27.90768
+            float physics:upperLimit = 61.34232
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandIndexDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 11.47948755937442
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandIndexIntermediate>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandIndexDistal>
+            point3f physics:localPos0 = (-8.6736174e-19, 0, -0.023471897)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.018532129, 0.040577605, -0.11605826, 0.99224013)
+            quatf physics:localRot1 = (2.4777587e-18, 1.1094977e-19, -0.21578811, 0.9764402)
+            float physics:lowerLimit = -11.479487
+            float physics:upperLimit = 56.52051
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandMiddleProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandWrist>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandMiddleProximalBase>
+            point3f physics:localPos0 = (-6.938894e-18, -1.7347235e-18, -0.09313968)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.6687516, 0.06821866, 0.2138695, 0.70878583)
+            quatf physics:localRot1 = (0.7069861, -0.013060493, -0.013060493, 0.7069861)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandMiddleProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 8.127690235042666
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandMiddleProximalBase>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandMiddleProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-6.2133854e-18, -2.4177137e-19, -0.045093723, 0.9989828)
+            quatf physics:localRot1 = (-6.2133854e-18, -2.4177137e-19, -0.045093723, 0.9989828)
+            float physics:lowerLimit = -20.87769
+            float physics:upperLimit = 68.37231
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandMiddleIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 17.222493686791964
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandMiddleProximal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandMiddleIntermediate>
+            point3f physics:localPos0 = (2.1684043e-19, -4.3368087e-19, -0.041396257)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.030042678, -0.071343794, -0.04606153, 0.99593467)
+            quatf physics:localRot1 = (7.424658e-18, 2.0855411e-18, -0.19332463, 0.98113483)
+            float physics:lowerLimit = -17.222494
+            float physics:upperLimit = 72.027504
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandMiddleDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0.029293238561330377
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandMiddleIntermediate>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandMiddleDistal>
+            point3f physics:localPos0 = (8.6736174e-19, -1.7347235e-18, -0.021840101)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.00028078211, 0.0016654514, -0.19326454, 0.9811452)
+            quatf physics:localRot1 = (8.142991e-18, 4.4613263e-18, -0.1935157, 0.98109716)
+            float physics:lowerLimit = -0.02929324
+            float physics:upperLimit = 67.9707
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandRingProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandWrist>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandRingProximalBase>
+            point3f physics:localPos0 = (-0.021343509, -0.001230915, -0.078376904)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.6809659, 0.10302383, 0.18041414, 0.70222664)
+            quatf physics:localRot1 = (0.7034327, -0.07198953, -0.07198953, 0.7034327)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandRingProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -1.253236387808174
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandRingProximalBase>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandRingProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-4.8434403e-18, 5.503841e-18, 0.005152077, 0.9999867)
+            quatf physics:localRot1 = (-4.8434403e-18, 5.503841e-18, 0.005152077, 0.9999867)
+            float physics:lowerLimit = -11.496763
+            float physics:upperLimit = 77.753235
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandRingIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 29.28778121737037
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandRingProximal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandRingIntermediate>
+            point3f physics:localPos0 = (-1.7347235e-18, 0, -0.041563686)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.012027925, -0.09155355, 0.00643223, 0.99570674)
+            quatf physics:localRot1 = (-1.1121262e-19, 1.8608253e-18, -0.24541743, 0.9694175)
+            float physics:lowerLimit = -29.28778
+            float physics:upperLimit = 59.96222
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandRingDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 14.098435274063322
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandRingIntermediate>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandRingDistal>
+            point3f physics:localPos0 = (1.0842022e-19, 0, -0.021151831)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.0026910317, 0.018287675, -0.24563383, 0.9691864)
+            quatf physics:localRot1 = (2.9469362e-18, -4.9193824e-20, -0.3628118, 0.9318624)
+            float physics:lowerLimit = -14.098435
+            float physics:upperLimit = 53.901566
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandLittleProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandWrist>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandLittleProximalBase>
+            point3f physics:localPos0 = (-0.042687017, -0.00246183, -0.06361413)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.67476666, 0.08481492, 0.19806102, 0.7058812)
+            quatf physics:localRot1 = (0.6913952, -0.14823171, -0.14823171, 0.6913952)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandLittleProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0.40930310562781635
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandLittleProximalBase>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandLittleProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (4.6519864e-18, -2.998706e-17, -0.023299726, 0.9997285)
+            quatf physics:localRot1 = (4.6519864e-18, -2.998706e-17, -0.023299726, 0.9997285)
+            float physics:lowerLimit = -13.159303
+            float physics:upperLimit = 76.0907
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandLittleIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 35.343158042059976
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandLittleProximal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandLittleIntermediate>
+            point3f physics:localPos0 = (-1.7347235e-18, -4.3368087e-19, -0.038407292)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0015643345, -0.17418335, -0.021526244, 0.9844767)
+            quatf physics:localRot1 = (-4.639271e-18, -1.3217013e-18, -0.32471037, 0.9458135)
+            float physics:lowerLimit = -35.34316
+            float physics:upperLimit = 53.90684
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandLittleDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 12.53599909020971
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandLittleIntermediate>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandLittleDistal>
+            point3f physics:localPos0 = (2.1684043e-19, 0, -0.018168379)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.015423087, -0.026858289, -0.32341582, 0.94574994)
+            quatf physics:localRot1 = (-6.612463e-19, 2.8916582e-18, -0.42477974, 0.90529674)
+            float physics:lowerLimit = -12.535999
+            float physics:upperLimit = 55.464
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandThumbMetacarpal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "thumb_cmc_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 2.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandWrist>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandThumbMetacarpalBase>
+            point3f physics:localPos0 = (0.019096823, -0.016001893, -0.027915062)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.9759465, -0.005800198, -0.193768, 0.0997433)
+            quatf physics:localRot1 = (0.688338, 0.1618359, 0.1618359, 0.688338)
+            float physics:lowerLimit = -8.5
+            float physics:upperLimit = 51
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandThumbMetacarpal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "thumb_cmc_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandThumbMetacarpalBase>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandThumbMetacarpal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-2.6016627e-18, -8.178903e-18, 0.41712424, 0.9088495)
+            quatf physics:localRot1 = (-2.6016627e-18, -8.178903e-18, 0.41712424, 0.9088495)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 42.5
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandThumbProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 23.283897923997756
+                    string kind = "thumb_mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandThumbMetacarpal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandThumbProximal>
+            point3f physics:localPos0 = (8.6736174e-19, 0, -0.040311288)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0020269197, 0.09675246, 0.4063068, 0.90859765)
+            quatf physics:localRot1 = (-1.9118795e-18, 1.8277562e-19, 0.21893851, 0.97573864)
+            float physics:lowerLimit = -31.783897
+            float physics:upperLimit = 27.716103
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "LeftHandThumbDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -0.11416135558656314
+                    string kind = "thumb_ip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Left/LeftHandThumbProximal>
+            rel physics:body1 = </astronaut/Hands/Left/LeftHandThumbDistal>
+            point3f physics:localPos0 = (4.3368087e-19, 0, -0.019991498)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.0000055832134, -0.00090997794, 0.2189666, 0.9757319)
+            quatf physics:localRot1 = (-6.206082e-20, 2.0148532e-18, 0.21993881, 0.9755137)
+            float physics:lowerLimit = -12.6358385
+            float physics:upperLimit = 68.11416
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsFixedJoint "RightWristMount"
+        {
+            rel physics:body1 = </astronaut/Hands/Right/RightHandWrist>
+            point3f physics:localPos0 = (0.01, -0.36, 0.966)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.048420403, -0.195976, 0.072728954, 0.9767084)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "RightHandIndexProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandWrist>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandIndexProximalBase>
+            point3f physics:localPos0 = (-0.024911774, -0.00246183, -0.097971134)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.6761465, -0.08754464, -0.19365714, 0.7054493)
+            quatf physics:localRot1 = (0.7046234, -0.05921064, -0.05921064, 0.7046234)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandIndexProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -9.614644211430434
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandIndexProximalBase>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandIndexProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (2.3041002e-18, 9.789846e-18, 0.14085533, 0.99003017)
+            quatf physics:localRot1 = (2.3041002e-18, 9.789846e-18, 0.14085533, 0.99003017)
+            float physics:lowerLimit = -3.1353557
+            float physics:upperLimit = 86.11465
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandIndexIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 27.907681424488914
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandIndexProximal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandIndexIntermediate>
+            point3f physics:localPos0 = (0, 0, -0.037768506)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.068238005, 0.02137882, 0.12806244, 0.9891848)
+            quatf physics:localRot1 = (1.2398349e-17, 7.745734e-18, -0.1136714, 0.9935184)
+            float physics:lowerLimit = -27.90768
+            float physics:upperLimit = 61.34232
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandIndexDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 11.47948755937442
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandIndexIntermediate>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandIndexDistal>
+            point3f physics:localPos0 = (8.6736174e-19, 0, -0.023471897)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.018532129, -0.040577605, -0.11605826, 0.99224013)
+            quatf physics:localRot1 = (-2.4777587e-18, -1.1094977e-19, -0.21578811, 0.9764402)
+            float physics:lowerLimit = -11.479487
+            float physics:upperLimit = 56.52051
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandMiddleProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandWrist>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandMiddleProximalBase>
+            point3f physics:localPos0 = (6.938894e-18, -1.7347235e-18, -0.09313968)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70878583, -0.2138695, -0.06821866, 0.6687516)
+            quatf physics:localRot1 = (0.7069861, 0.013060493, 0.013060493, 0.7069861)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandMiddleProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 8.127690235042666
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandMiddleProximalBase>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandMiddleProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (6.2133854e-18, 2.4177137e-19, -0.045093723, 0.9989828)
+            quatf physics:localRot1 = (6.2133854e-18, 2.4177137e-19, -0.045093723, 0.9989828)
+            float physics:lowerLimit = -20.87769
+            float physics:upperLimit = 68.37231
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandMiddleIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 17.222493686791964
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandMiddleProximal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandMiddleIntermediate>
+            point3f physics:localPos0 = (-2.1684043e-19, -4.3368087e-19, -0.041396257)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.030042678, 0.071343794, -0.04606153, 0.99593467)
+            quatf physics:localRot1 = (-7.424658e-18, -2.0855411e-18, -0.19332463, 0.98113483)
+            float physics:lowerLimit = -17.222494
+            float physics:upperLimit = 72.027504
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandMiddleDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0.029293238561330377
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandMiddleIntermediate>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandMiddleDistal>
+            point3f physics:localPos0 = (-8.6736174e-19, -1.7347235e-18, -0.021840101)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.00028078211, -0.0016654514, -0.19326454, 0.9811452)
+            quatf physics:localRot1 = (-8.142991e-18, -4.4613263e-18, -0.1935157, 0.98109716)
+            float physics:lowerLimit = -0.02929324
+            float physics:upperLimit = 67.9707
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandRingProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandWrist>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandRingProximalBase>
+            point3f physics:localPos0 = (0.021343509, -0.001230915, -0.078376904)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70222664, -0.18041414, -0.10302383, 0.6809659)
+            quatf physics:localRot1 = (0.7034327, 0.07198953, 0.07198953, 0.7034327)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandRingProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -1.253236387808174
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandRingProximalBase>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandRingProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (4.8434403e-18, -5.503841e-18, 0.005152077, 0.9999867)
+            quatf physics:localRot1 = (4.8434403e-18, -5.503841e-18, 0.005152077, 0.9999867)
+            float physics:lowerLimit = -11.496763
+            float physics:upperLimit = 77.753235
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandRingIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 29.28778121737037
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandRingProximal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandRingIntermediate>
+            point3f physics:localPos0 = (1.7347235e-18, 0, -0.041563686)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.012027925, 0.09155355, 0.00643223, 0.99570674)
+            quatf physics:localRot1 = (1.1121262e-19, -1.8608253e-18, -0.24541743, 0.9694175)
+            float physics:lowerLimit = -29.28778
+            float physics:upperLimit = 59.96222
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandRingDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 14.098435274063322
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandRingIntermediate>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandRingDistal>
+            point3f physics:localPos0 = (-1.0842022e-19, 0, -0.021151831)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0026910317, -0.018287675, -0.24563383, 0.9691864)
+            quatf physics:localRot1 = (-2.9469362e-18, 4.9193824e-20, -0.3628118, 0.9318624)
+            float physics:lowerLimit = -14.098435
+            float physics:upperLimit = 53.901566
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandLittleProximal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "mcp_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandWrist>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandLittleProximalBase>
+            point3f physics:localPos0 = (0.042687017, -0.00246183, -0.06361413)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.7058812, -0.19806102, -0.08481492, 0.67476666)
+            quatf physics:localRot1 = (0.6913952, 0.14823171, 0.14823171, 0.6913952)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 17
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandLittleProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0.40930310562781635
+                    string kind = "mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandLittleProximalBase>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandLittleProximal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-4.6519864e-18, 2.998706e-17, -0.023299726, 0.9997285)
+            quatf physics:localRot1 = (-4.6519864e-18, 2.998706e-17, -0.023299726, 0.9997285)
+            float physics:lowerLimit = -13.159303
+            float physics:upperLimit = 76.0907
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandLittleIntermediate_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 35.343158042059976
+                    string kind = "pip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandLittleProximal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandLittleIntermediate>
+            point3f physics:localPos0 = (1.7347235e-18, -4.3368087e-19, -0.038407292)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.0015643345, 0.17418335, -0.021526244, 0.9844767)
+            quatf physics:localRot1 = (4.639271e-18, 1.3217013e-18, -0.32471037, 0.9458135)
+            float physics:lowerLimit = -35.34316
+            float physics:upperLimit = 53.90684
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandLittleDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 12.53599909020971
+                    string kind = "dip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandLittleIntermediate>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandLittleDistal>
+            point3f physics:localPos0 = (-2.1684043e-19, 0, -0.018168379)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.015423087, 0.026858289, -0.32341582, 0.94574994)
+            quatf physics:localRot1 = (6.612463e-19, -2.8916582e-18, -0.42477974, 0.90529674)
+            float physics:lowerLimit = -12.535999
+            float physics:upperLimit = 55.464
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandThumbMetacarpal_abd" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "thumb_cmc_abd"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 2.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandWrist>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandThumbMetacarpalBase>
+            point3f physics:localPos0 = (-0.019096823, -0.016001893, -0.027915062)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.0997433, 0.193768, 0.005800198, 0.9759465)
+            quatf physics:localRot1 = (0.688338, -0.1618359, -0.1618359, 0.688338)
+            float physics:lowerLimit = -8.5
+            float physics:upperLimit = 51
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandThumbMetacarpal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 0
+                    string kind = "thumb_cmc_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 3
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.00006981317
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandThumbMetacarpalBase>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandThumbMetacarpal>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (2.6016627e-18, 8.178903e-18, 0.41712424, 0.9088495)
+            quatf physics:localRot1 = (2.6016627e-18, 8.178903e-18, 0.41712424, 0.9088495)
+            float physics:lowerLimit = -17
+            float physics:upperLimit = 42.5
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandThumbProximal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = 23.283897923997756
+                    string kind = "thumb_mcp_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 1.5
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000034906585
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandThumbMetacarpal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandThumbProximal>
+            point3f physics:localPos0 = (-8.6736174e-19, 0, -0.040311288)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.0020269197, -0.09675246, 0.4063068, 0.90859765)
+            quatf physics:localRot1 = (1.9118795e-18, -1.8277562e-19, 0.21893851, 0.97573864)
+            float physics:lowerLimit = -31.783897
+            float physics:upperLimit = 27.716103
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+
+        def PhysicsRevoluteJoint "RightHandThumbDistal_flex" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "NewtonJointAPI"]
+            customData = {
+                dictionary astronaut = {
+                    double bindDeg = -0.11416135558656314
+                    string kind = "thumb_ip_flex"
+                }
+            }
+        )
+        {
+            float drive:angular:physics:damping = 0.0008726646
+            float drive:angular:physics:maxForce = 0.7
+            float drive:angular:physics:stiffness = 0.04363323
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            custom float newton:armature = 0.0005
+            custom float newton:damping = 0.000017453292
+            uniform token physics:axis = "X"
+            rel physics:body0 = </astronaut/Hands/Right/RightHandThumbProximal>
+            rel physics:body1 = </astronaut/Hands/Right/RightHandThumbDistal>
+            point3f physics:localPos0 = (-4.3368087e-19, 0, -0.019991498)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0000055832134, 0.00090997794, 0.2189666, 0.9757319)
+            quatf physics:localRot1 = (6.206082e-20, -2.0148532e-18, 0.21993881, 0.9755137)
+            float physics:lowerLimit = -12.6358385
+            float physics:upperLimit = 68.11416
+            custom float state:angular:physics:position = 0
+            custom float state:angular:physics:velocity = 0
+        }
+    }
+
+    def Scope "Hands"
+    {
+        def Scope "Left"
+        {
+            def Xform "LeftHandWrist" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsArticulationRootAPI", "NewtonArticulationRootAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandWrist"
+                    }
+                }
+            )
+            {
+                custom bool newton:selfCollisionEnabled = 0
+                float physics:mass = 0.37218824
+                quatf xformOp:orient = (0.9767084, 0.072728954, -0.195976, 0.048420403)
+                double3 xformOp:translate = (0.01, 0.36, 0.966)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Cube "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double size = 2
+                    quatf xformOp:orient = (1, 0, 0, 0)
+                    float3 xformOp:scale = (0.045799397, 0.03319991, 0.036485568)
+                    double3 xformOp:translate = (-0.008887622078826877, 0.016251404345017866, -0.06148556659742046)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                }
+            }
+
+            def Xform "LeftHandIndexProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.98588395, 0.14299083, -0.07492509, 0.044414513)
+                double3 xformOp:translate = (0.07, 0.375, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "LeftHandIndexProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandIndexProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.058813818
+                quatf xformOp:orient = (0.98588395, 0.14299083, -0.07492509, 0.044414513)
+                double3 xformOp:translate = (0.07, 0.375, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.03776850539801654
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01884075095133122
+                    quatf xformOp:orient = (-5.1286873e-19, 0.74498653, 0.6670795, -1.1559516e-17)
+                    double3 xformOp:translate = (0, 0, -0.01888425269900827)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandIndexIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandIndexIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.028134134
+                quatf xformOp:orient = (0.9837443, -0.10145476, -0.12112302, 0.08534178)
+                double3 xformOp:translate = (0.0751, 0.3859, 0.8502)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.02347189809112163
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.015544117934340894
+                    quatf xformOp:orient = (-1.0151154e-17, 0.7577129, 0.65258807, -9.0235785e-18)
+                    double3 xformOp:translate = (6.5052130349130266e-18, -8.673617379884035e-19, -0.011735949045560815)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandIndexDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandIndexDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014465062
+                quatf xformOp:orient = (0.9695481, -0.20628034, -0.09121885, 0.09541497)
+                double3 xformOp:translate = (0.08109999999999999, 0.38170000000000004, 0.8279)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.01502622920377903
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.013020392180523576
+                    quatf xformOp:orient = (1.8250185e-16, 0.98736554, 0.158459, -1.601688e-16)
+                    double3 xformOp:translate = (-2.0599841277224584e-18, -3.0357660829594124e-18, -0.007513114601889515)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandMiddleProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.9964765, -0.04622441, 0.015289153, 0.06829494)
+                double3 xformOp:translate = (0.045, 0.375, 0.881)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "LeftHandMiddleProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandMiddleProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.034185193
+                quatf xformOp:orient = (0.9964765, -0.04622441, 0.015289153, 0.06829494)
+                double3 xformOp:translate = (0.045, 0.375, 0.881)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.04139625586934174
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.014601083587789051
+                    quatf xformOp:orient = (-3.58833e-19, 0.7541758, 0.6566726, -4.241523e-18)
+                    double3 xformOp:translate = (-3.3610267347050637e-18, 4.336808689942018e-19, -0.020698127934670872)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandMiddleIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandMiddleIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.02992747
+                quatf xformOp:orient = (0.97585356, -0.18698962, -0.06980092, 0.088727325)
+                double3 xformOp:translate = (0.044000000000000004, 0.3711, 0.8397999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.021840100732368306
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.016176778034313794
+                    quatf xformOp:orient = (2.0217553e-17, 0.7580312, 0.6522183, 5.041672e-18)
+                    double3 xformOp:translate = (6.071532165918825e-18, -2.168404344971009e-17, -0.010920050366184103)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandMiddleDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandMiddleDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014526142
+                quatf xformOp:orient = (0.975918, -0.18739195, -0.06816722, 0.08843934)
+                double3 xformOp:translate = (0.0477, 0.36340000000000006, 0.8197)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.014309179774980765
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.013156966052572694
+                    quatf xformOp:orient = (-3.7856748e-16, 0.75800574, 0.6522479, 5.161322e-16)
+                    double3 xformOp:translate = (7.806255641895632e-18, 3.382710778154774e-17, -0.007154589887490372)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandRingProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.99259543, -0.0017003875, 0.10191673, 0.06606389)
+                double3 xformOp:translate = (0.02, 0.37, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "LeftHandRingProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandRingProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.05511416
+                quatf xformOp:orient = (0.99259543, -0.0017003875, 0.10191673, 0.06606389)
+                double3 xformOp:translate = (0.02, 0.37, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.04156368607330198
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.017883851472365923
+                    quatf xformOp:orient = (7.268009e-19, 0.7530825, 0.6579261, 3.2953862e-18)
+                    double3 xformOp:translate = (4.336808689942018e-18, 2.7267684638010437e-17, -0.020781843036650986)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandRingIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandRingIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.027209576
+                quatf xformOp:orient = (0.9661756, -0.24542552, -0.009385567, 0.07863172)
+                double3 xformOp:translate = (0.011600000000000001, 0.3693, 0.8453)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.021151832071950802
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.0156723548914016
+                    quatf xformOp:orient = (-5.0694872e-18, 0.9997691, -0.021489415, 2.3577234e-18)
+                    double3 xformOp:translate = (9.215718466126788e-19, 0, -0.010575916035975403)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandRingDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandRingDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014673907
+                quatf xformOp:orient = (0.9284266, -0.3635671, -0.00054244476, 0.07643739)
+                double3 xformOp:translate = (0.012800000000000002, 0.3593, 0.8266999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.015761921773423015
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.012978530930599969
+                    quatf xformOp:orient = (-6.975632e-16, 0.999187, -0.04031545, 6.4993764e-17)
+                    double3 xformOp:translate = (7.047314121155779e-19, 1.0408340855860843e-17, -0.007880960886711507)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandLittleProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.97562283, -0.034909036, 0.2076986, 0.06166651)
+                double3 xformOp:translate = (-0.005, 0.365, 0.891)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "LeftHandLittleProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandLittleProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.059411205
+                quatf xformOp:orient = (0.97562283, -0.034909036, 0.2076986, 0.06166651)
+                double3 xformOp:translate = (-0.005, 0.365, 0.891)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.03840729097450121
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01884075095133122
+                    quatf xformOp:orient = (1.4947356e-17, 0.75735617, 0.653002, -1.8586955e-17)
+                    double3 xformOp:translate = (1.8214596497756474e-17, -2.5153490401663703e-17, -0.01920364548725066)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandLittleIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandLittleIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.01995988
+                quatf xformOp:orient = (0.9425231, -0.32601193, 0.013241741, 0.07204885)
+                double3 xformOp:translate = (-0.0204, 0.3614, 0.856)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.018168379124181726
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01427157144375362
+                    quatf xformOp:orient = (6.0393867e-18, 0.9982926, -0.05841133, 1.3883244e-18)
+                    double3 xformOp:translate = (2.3852447794681098e-18, 3.382710778154774e-17, -0.009084189562090906)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandLittleDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandLittleDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.0138084665
+                quatf xformOp:orient = (0.9011642, -0.42434242, -0.0229526, 0.08549744)
+                double3 xformOp:translate = (-0.02, 0.3502, 0.8416999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.015934040872893643
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.012642777472856444
+                    quatf xformOp:orient = (-4.3221002e-16, 0.9997944, -0.020275686, 6.765505e-17)
+                    double3 xformOp:translate = (-6.776263578034403e-19, -3.642919299551295e-17, -0.007967020436446787)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandThumbMetacarpalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.66218877, 0.17861596, -0.3975041, -0.6095842)
+                double3 xformOp:translate = (0.04, 0.35000000000000003, 0.946)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "LeftHandThumbMetacarpal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandThumbMetacarpal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.060607944
+                quatf xformOp:orient = (0.66218877, 0.17861596, -0.3975041, -0.6095842)
+                double3 xformOp:translate = (0.04, 0.35000000000000003, 0.946)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.040311288741492764
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.018765116283236676
+                    quatf xformOp:orient = (-3.3365999e-18, 0.20083956, 0.97962415, -2.691947e-17)
+                    double3 xformOp:translate = (1.691355389077387e-17, 3.9898639947466563e-17, -0.020155644370746358)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandThumbProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandThumbProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.04813597
+                quatf xformOp:orient = (0.7072481, 0.10889714, -0.2011246, -0.6689473)
+                double3 xformOp:translate = (0.07, 0.34, 0.9209999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.01999149819298195
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.019835453208421127
+                    quatf xformOp:orient = (1.7263185e-18, 0.1578241, 0.9874672, -1.3578419e-18)
+                    double3 xformOp:translate = (4.336808689942018e-19, 6.071532165918825e-18, -0.009995749096490977)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "LeftHandThumbDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "LeftHandThumbDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.023838835
+                quatf xformOp:orient = (0.7070904, 0.10896796, -0.20244086, -0.66870534)
+                double3 xformOp:translate = (0.07859999999999999, 0.33770000000000006, 0.9030999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.01051025891771434
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.016636663123887594
+                    quatf xformOp:orient = (-4.0895256e-16, 0.15907033, 0.98726726, 3.3657084e-16)
+                    double3 xformOp:translate = (3.176712365382528e-17, 3.165870343657673e-17, -0.005255129458857127)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+        }
+
+        def Scope "Right"
+        {
+            def Xform "RightHandWrist" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsArticulationRootAPI", "NewtonArticulationRootAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandWrist"
+                    }
+                }
+            )
+            {
+                custom bool newton:selfCollisionEnabled = 0
+                float physics:mass = 0.3720052
+                quatf xformOp:orient = (0.048420403, -0.195976, 0.072728954, 0.9767084)
+                double3 xformOp:translate = (0.01, -0.36, 0.966)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Cube "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double size = 2
+                    quatf xformOp:orient = (1, 0, 0, 0)
+                    float3 xformOp:scale = (0.045799397, 0.03315613, 0.036485568)
+                    double3 xformOp:translate = (0.008887622078826853, 0.01621418660275462, -0.0614855665974204)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                }
+            }
+
+            def Xform "RightHandIndexProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.044414513, -0.07492509, 0.14299083, 0.98588395)
+                double3 xformOp:translate = (0.07, -0.375, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "RightHandIndexProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandIndexProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.058840815
+                quatf xformOp:orient = (0.044414513, -0.07492509, 0.14299083, 0.98588395)
+                double3 xformOp:translate = (0.07, -0.375, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.03776850539801654
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01883785621353007
+                    quatf xformOp:orient = (-5.1286873e-19, 0.74498653, -0.6670795, 1.1559516e-17)
+                    double3 xformOp:translate = (0, 0, -0.01888425269900827)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandIndexIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandIndexIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.02813663
+                quatf xformOp:orient = (0.08534178, -0.12112302, -0.10145476, 0.9837443)
+                double3 xformOp:translate = (0.0751, -0.3859, 0.8502)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.02347189809112163
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.015539466694134602
+                    quatf xformOp:orient = (-1.0151154e-17, 0.7577129, -0.65258807, 9.0235785e-18)
+                    double3 xformOp:translate = (-6.5052130349130266e-18, -8.673617379884035e-19, -0.011735949045560815)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandIndexDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandIndexDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014477033
+                quatf xformOp:orient = (0.09541497, -0.09121885, -0.20628034, 0.9695481)
+                double3 xformOp:translate = (0.08109999999999999, -0.38170000000000004, 0.8279)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.015026231527310575
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.013020389856992044
+                    quatf xformOp:orient = (3.0238817e-16, 0.98736554, -0.158459, 1.9889591e-16)
+                    double3 xformOp:translate = (-4.445228907190568e-18, -6.071532165918825e-18, -0.007513115763655288)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandMiddleProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.06829494, 0.015289153, -0.04622441, 0.9964765)
+                double3 xformOp:translate = (0.045, -0.375, 0.881)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "RightHandMiddleProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandMiddleProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.034213606
+                quatf xformOp:orient = (0.06829494, 0.015289153, -0.04622441, 0.9964765)
+                double3 xformOp:translate = (0.045, -0.375, 0.881)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.04139625586934174
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.014601103247513509
+                    quatf xformOp:orient = (-3.58833e-19, 0.7541758, -0.6566726, 4.241523e-18)
+                    double3 xformOp:translate = (3.3610267347050637e-18, 4.336808689942018e-19, -0.020698127934670872)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandMiddleIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandMiddleIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.029952375
+                quatf xformOp:orient = (0.088727325, -0.06980092, -0.18698962, 0.97585356)
+                double3 xformOp:translate = (0.044000000000000004, -0.3711, 0.8397999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.021840100732368306
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.016176805747635237
+                    quatf xformOp:orient = (2.0217553e-17, 0.7580312, -0.6522183, -5.041672e-18)
+                    double3 xformOp:translate = (-6.071532165918825e-18, -2.168404344971009e-17, -0.010920050366184103)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandMiddleDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandMiddleDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014538185
+                quatf xformOp:orient = (0.08843934, -0.06816722, -0.18739195, 0.975918)
+                double3 xformOp:translate = (0.0477, -0.36340000000000006, 0.8197)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.014309172814960452
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.013156973012593057
+                    quatf xformOp:orient = (-9.823127e-17, 0.75800574, -0.6522479, 3.0360755e-16)
+                    double3 xformOp:translate = (-3.2526065174565133e-18, 3.0357660829594124e-18, -0.007154586407480163)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandRingProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.06606389, 0.10191673, -0.0017003875, 0.99259543)
+                double3 xformOp:translate = (0.02, -0.37, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "RightHandRingProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandRingProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.055159826
+                quatf xformOp:orient = (0.06606389, 0.10191673, -0.0017003875, 0.99259543)
+                double3 xformOp:translate = (0.02, -0.37, 0.886)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.04156368607330198
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.017883856139947425
+                    quatf xformOp:orient = (7.268009e-19, 0.7530825, -0.6579261, -3.2953862e-18)
+                    double3 xformOp:translate = (-4.336808689942018e-18, 2.7267684638010437e-17, -0.020781843036650986)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandRingIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandRingIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.027232114
+                quatf xformOp:orient = (0.07863172, -0.009385567, -0.24542552, 0.9661756)
+                double3 xformOp:translate = (0.011600000000000001, -0.3693, 0.8453)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.021151832071950802
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.015672357134206845
+                    quatf xformOp:orient = (-5.0694872e-18, 0.9997691, 0.021489415, -2.3577234e-18)
+                    double3 xformOp:translate = (-9.215718466126788e-19, 0, -0.010575916035975403)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandRingDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandRingDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.014686074
+                quatf xformOp:orient = (0.07643739, -0.00054244476, -0.3635671, 0.9284266)
+                double3 xformOp:translate = (0.012800000000000002, -0.3593, 0.8266999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.015761914571384403
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.012978538132638572
+                    quatf xformOp:orient = (-6.291693e-17, 0.999187, 0.04031545, -6.725109e-18)
+                    double3 xformOp:translate = (7.589415207398531e-19, 1.8214596497756474e-17, -0.007880957285692262)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandLittleProximalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (0.06166651, 0.2076986, -0.034909036, 0.97562283)
+                double3 xformOp:translate = (-0.005, -0.365, 0.891)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "RightHandLittleProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandLittleProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.059438515
+                quatf xformOp:orient = (0.06166651, 0.2076986, -0.034909036, 0.97562283)
+                double3 xformOp:translate = (-0.005, -0.365, 0.891)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.03840729097450121
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01883785621353007
+                    quatf xformOp:orient = (1.4947356e-17, 0.75735617, -0.653002, 1.8586955e-17)
+                    double3 xformOp:translate = (-1.8214596497756474e-17, -2.5153490401663703e-17, -0.01920364548725066)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandLittleIntermediate" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandLittleIntermediate"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.019976445
+                quatf xformOp:orient = (0.07204885, 0.013241741, -0.32601193, 0.9425231)
+                double3 xformOp:translate = (-0.0204, -0.3614, 0.856)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.018168379124181726
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.014271582644838158
+                    quatf xformOp:orient = (6.0393867e-18, 0.9982926, 0.05841133, -1.3883244e-18)
+                    double3 xformOp:translate = (-2.3852447794681098e-18, 3.382710778154774e-17, -0.009084189562090906)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandLittleDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandLittleDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.013819895
+                quatf xformOp:orient = (0.08549744, -0.0229526, -0.42434242, 0.9011642)
+                double3 xformOp:translate = (-0.02, -0.3502, 0.8416999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.015934042630863968
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.012642775714886074
+                    quatf xformOp:orient = (9.232865e-16, 0.9997944, 0.020275686, -1.8952243e-17)
+                    double3 xformOp:translate = (0, -1.474514954580286e-17, -0.007967021315431984)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandThumbMetacarpalBase" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (5e-8, 5e-8, 5e-8)
+                float physics:mass = 0.005
+                quatf physics:principalAxes = (1, 0, 0, 0)
+                quatf xformOp:orient = (-0.6095842, -0.3975041, 0.17861596, 0.66218877)
+                double3 xformOp:translate = (0.04, -0.35000000000000003, 0.946)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+
+            def Xform "RightHandThumbMetacarpal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandThumbMetacarpal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.06066034
+                quatf xformOp:orient = (-0.6095842, -0.3975041, 0.17861596, 0.66218877)
+                double3 xformOp:translate = (0.04, -0.35000000000000003, 0.946)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.040311288741492764
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01876540400017281
+                    quatf xformOp:orient = (3.3365999e-18, -0.20083956, 0.97962415, -2.691947e-17)
+                    double3 xformOp:translate = (-1.691355389077387e-17, 3.9898639947466563e-17, -0.020155644370746358)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandThumbProximal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandThumbProximal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.048004363
+                quatf xformOp:orient = (-0.6689473, -0.2011246, 0.10889714, 0.7072481)
+                double3 xformOp:translate = (0.07, -0.34, 0.9209999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.01999149819298195
+                    rel material:binding:physics = </astronaut/Physics/GloveMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01980794675171028
+                    quatf xformOp:orient = (-1.7263185e-18, -0.1578241, 0.9874672, -1.3578419e-18)
+                    double3 xformOp:translate = (-4.336808689942018e-19, 6.071532165918825e-18, -0.009995749096490977)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+
+            def Xform "RightHandThumbDistal" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                customData = {
+                    dictionary astronaut = {
+                        string skinJoint = "RightHandThumbDistal"
+                    }
+                }
+            )
+            {
+                float physics:mass = 0.02385858
+                quatf xformOp:orient = (-0.66870534, -0.20244086, 0.10896796, 0.7070904)
+                double3 xformOp:translate = (0.07859999999999999, -0.33770000000000006, 0.9030999999999999)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+                def Capsule "Collider0" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Z"
+                    double height = 0.010510256520537657
+                    rel material:binding:physics = </astronaut/Physics/FingertipMaterial> (
+                        bindMaterialAs = "weakerThanDescendants"
+                    )
+                    uniform token purpose = "guide"
+                    double radius = 0.01663666552106425
+                    quatf xformOp:orient = (1.2278885e-16, -0.15907033, 0.98726726, 7.9484487e-16)
+                    double3 xformOp:translate = (0, 8.673617379884035e-18, -0.005255128260268829)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+                }
+            }
+        }
+    }
+}
+

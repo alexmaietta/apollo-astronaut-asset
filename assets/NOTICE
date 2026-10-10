@@ -1,0 +1,10 @@
+Apollo astronaut asset
+Copyright 2026 Alex Maietta
+
+Built on NVIDIA's Omniverse Astronaut sample (https://docs.omniverse.nvidia.com/composer/latest/prod_content/mount-content.html#astronaut), Copyright NVIDIA Corporation. The mesh, MDL materials and textures in this asset are NVIDIA's and remain under NVIDIA's terms for Omniverse content (NVIDIA Omniverse License Agreement); they are not relicensed here.
+
+The additions (UsdSkel skeleton and skin weights, OpenXR joint frames, shoulder corrective blend shapes and their driver, physics hands, A7L glove parameters, suit body colliders, the Blender armature) are licensed under Creative Commons Attribution 4.0 International (LICENSE). Credit: "Apollo astronaut rig by Alex Maietta, built on NVIDIA's Omniverse Astronaut sample".
+
+Source: https://github.com/alexmaietta/apollo-astronaut-asset
+
+Not affiliated with or endorsed by NVIDIA or NASA.

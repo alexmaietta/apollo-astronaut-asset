@@ -1,0 +1,719 @@
+#usda 1.0
+(
+    defaultPrim = "astronaut"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "astronaut"
+{
+    def Scope "BodyColliders"
+    {
+        def Material "SuitMaterial" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.7
+            float physics:staticFriction = 0.8
+        }
+
+        def Xform "Torso0" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            double3 xformOp:translate = (0.01, 0, 1.3659999999999999)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.3800000000000001
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.15
+                quatf xformOp:orient = (0, 0, 0.99951303, -0.03120434)
+                double3 xformOp:translate = (-0.06, 0.03218719565607314, 0.1943707396595425)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "Torso0Mount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/Torso0>
+            point3f physics:localPos0 = (0.01, 0, 1.366)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "Torso1" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            double3 xformOp:translate = (0.01, 0, 1.3659999999999999)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.3800000000000001
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.15
+                quatf xformOp:orient = (0, 0, 0.99951303, -0.03120434)
+                double3 xformOp:translate = (0.06, 0.03218719565607314, 0.1943707396595425)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "Torso1Mount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/Torso1>
+            point3f physics:localPos0 = (0.01, 0, 1.366)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "Helmet" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            double3 xformOp:translate = (0.01, 0, 1.3659999999999999)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Sphere "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.2
+                quatf xformOp:orient = (1, 0, 0, 0)
+                double3 xformOp:translate = (0, 0.001933726870810601, -0.2896847609046585)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "HelmetMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/Helmet>
+            point3f physics:localPos0 = (0.01, 0, 1.366)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "PLSS" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            double3 xformOp:translate = (0.01, 0, 1.3659999999999999)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Cube "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double size = 2
+                quatf xformOp:orient = (0.0220648, 0.70676243, 0.70676243, -0.0220648)
+                float3 xformOp:scale = (0.135, 0.24, 0.35)
+                double3 xformOp:translate = (0, -0.26785236075034524, 0.1229476020118607)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+
+        def PhysicsFixedJoint "PLSSMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "Chest"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/PLSS>
+            point3f physics:localPos0 = (0.01, 0, 1.366)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.0220648, 0.70676243, 0.70676243, -0.0220648)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "LeftUpperArm" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftArmUpper"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.98694354, 0.14840436, -0.009308225, 0.061903115)
+            double3 xformOp:translate = (-0.01, 0.255, 1.456)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.2720294101747089
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.08
+                quatf xformOp:orient = (-1.5054613e-17, 0.74998415, 0.66145575, -8.136368e-19)
+                double3 xformOp:translate = (6.071532165918825e-18, 6.245004513516506e-17, -0.13601470508735433)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "LeftUpperArmMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftArmUpper"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/LeftUpperArm>
+            point3f physics:localPos0 = (-0.01, 0.255, 1.456)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.98694354, 0.14840436, -0.009308225, 0.061903115)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "LeftForearm" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftArmLower"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.9959054, 0.05134343, -0.046245225, 0.058289938)
+            double3 xformOp:translate = (-0.01, 0.335, 1.196)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.16221757039466236
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.065
+                quatf xformOp:orient = (-1.2565117e-17, 0.7487663, 0.66283405, 3.8887302e-17)
+                double3 xformOp:translate = (3.469446951953614e-18, 6.071532165918825e-18, -0.08110878519733118)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "LeftForearmMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftArmLower"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/LeftForearm>
+            point3f physics:localPos0 = (-0.01, 0.335, 1.196)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.9959054, 0.05134343, -0.046245225, 0.058289938)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "LeftThigh" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftUpperLeg"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.69989526, -0.10073033, -0.06279606, 0.7043129)
+            double3 xformOp:translate = (0.02, 0.09, 0.886)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.37043892883982915
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.09
+                quatf xformOp:orient = (-6.7433567e-18, 1.2319673e-18, 1, 0)
+                double3 xformOp:translate = (6.938893903907228e-18, -3.469446951953614e-18, -0.18521946441991463)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "LeftThighMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftUpperLeg"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/LeftThigh>
+            point3f physics:localPos0 = (0.02, 0.09, 0.886)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.69989526, -0.10073033, -0.06279606, 0.7043129)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "LeftShin" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftLowerLeg"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.7061041, 0.037642583, 0.07079267, -0.7035541)
+            double3 xformOp:translate = (0.04, 0.17500000000000002, 0.526)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.42547032799009615
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.075
+                quatf xformOp:orient = (6.8496796e-18, -1.1134301e-19, 1, 1.7347235e-18)
+                double3 xformOp:translate = (-1.3877787807814457e-17, 0, -0.21273516399504813)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "LeftShinMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftLowerLeg"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/LeftShin>
+            point3f physics:localPos0 = (0.04, 0.175, 0.526)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.7061041, 0.037642583, 0.07079267, -0.7035541)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "LeftFoot" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftFootAnkle"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.6418263, 0.3984592, -0.34558183, -0.55665296)
+            double3 xformOp:translate = (0.02, 0.24, 0.106)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.157797338380595
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.06
+                quatf xformOp:orient = (6.266217e-18, 3.3024927e-18, 1, -1.5652208e-18)
+                double3 xformOp:translate = (-1.97758476261356e-18, -6.938893903907228e-18, -0.07889866919029749)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "LeftFootMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "LeftFootAnkle"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/LeftFoot>
+            point3f physics:localPos0 = (0.02, 0.24, 0.106)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.6418263, 0.3984592, -0.34558183, -0.55665296)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "RightUpperArm" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightArmUpper"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.061903115, -0.009308225, 0.14840436, 0.98694354)
+            double3 xformOp:translate = (-0.01, -0.255, 1.456)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.2720294101747089
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.08
+                quatf xformOp:orient = (-1.5054613e-17, 0.74998415, -0.66145575, 8.136368e-19)
+                double3 xformOp:translate = (-6.071532165918825e-18, 6.245004513516506e-17, -0.13601470508735433)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "RightUpperArmMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightArmUpper"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/RightUpperArm>
+            point3f physics:localPos0 = (-0.01, -0.255, 1.456)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.061903115, -0.009308225, 0.14840436, 0.98694354)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "RightForearm" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightArmLower"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (0.058289938, -0.046245225, 0.05134343, 0.9959054)
+            double3 xformOp:translate = (-0.01, -0.335, 1.196)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.16221757039466236
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.065
+                quatf xformOp:orient = (-1.2565117e-17, 0.7487663, -0.66283405, -3.8887302e-17)
+                double3 xformOp:translate = (-3.469446951953614e-18, 6.071532165918825e-18, -0.08110878519733118)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "RightForearmMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightArmLower"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/RightForearm>
+            point3f physics:localPos0 = (-0.01, -0.335, 1.196)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.058289938, -0.046245225, 0.05134343, 0.9959054)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "RightThigh" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightUpperLeg"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.7062747, 0.03429433, 0.014717076, 0.7069536)
+            double3 xformOp:translate = (0, -0.09, 0.886)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.36100554012369396
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.09
+                quatf xformOp:orient = (0, -1.6263033e-19, 1, -8.6736174e-19)
+                double3 xformOp:translate = (5.204170427930421e-18, 8.673617379884035e-19, -0.180502770061847)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "RightThighMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightUpperLeg"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/RightThigh>
+            point3f physics:localPos0 = (0, -0.09, 0.886)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.7062747, 0.03429433, 0.014717076, 0.7069536)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "RightShin" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightLowerLeg"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.7050085, 0.05443372, -0.029236205, 0.70650214)
+            double3 xformOp:translate = (-0.01, -0.115, 0.526)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.4232316150761897
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.075
+                quatf xformOp:orient = (-1.7214778e-18, -2.9781782e-19, 1, 3.4429557e-18)
+                double3 xformOp:translate = (-6.071532165918825e-18, 6.938893903907228e-18, -0.2116158075380949)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "RightShinMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightLowerLeg"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/RightShin>
+            point3f physics:localPos0 = (-0.01, -0.115, 0.526)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.7050085, 0.05443372, -0.029236205, 0.70650214)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Xform "RightFoot" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightFootAnkle"
+                }
+            }
+        )
+        {
+            rel physics:filteredPairs = [
+                </astronaut/Hands/Left/LeftHandWrist>,
+                </astronaut/Hands/Right/RightHandWrist>,
+            ]
+            float physics:mass = 1
+            quatf xformOp:orient = (-0.57608986, -0.3672342, 0.39253166, 0.61577463)
+            double3 xformOp:translate = (-0.06, -0.13, 0.106)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+            def Capsule "Collider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "NewtonCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                uniform token axis = "Z"
+                double height = 0.16583123951776998
+                rel material:binding:physics = </astronaut/BodyColliders/SuitMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                uniform token purpose = "guide"
+                double radius = 0.06
+                quatf xformOp:orient = (-1.4295956e-18, -2.6052014e-18, 1, -1.17160696e-17)
+                double3 xformOp:translate = (1.2143064331837646e-19, 6.938893903907228e-18, -0.08291561975888498)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            }
+        }
+
+        def PhysicsFixedJoint "RightFootMount" (
+            customData = {
+                dictionary astronaut = {
+                    string skinJoint = "RightFootAnkle"
+                }
+            }
+        )
+        {
+            rel physics:body1 = </astronaut/BodyColliders/RightFoot>
+            point3f physics:localPos0 = (-0.06, -0.13, 0.106)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.57608986, -0.3672342, 0.39253166, 0.61577463)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+    }
+}
+
