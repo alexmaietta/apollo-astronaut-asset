@@ -69,7 +69,7 @@ def main():
                 "| `astronaut-blend.zip` | Blender file (`blender/astronaut.blend`): armature, skinned meshes, corrective "
                 "shape keys, textures packed |\n\n"
                 "Licensing: see LICENSE and NOTICE in each zip. NVIDIA's mesh and textures stay under NVIDIA's terms; "
-                "the rig, physics and other additions are CC BY 4.0. Checksums: `SHA256SUMS`.\n")
+                "the rig, physics and other additions are CC0 1.0 (public domain). Checksums: `SHA256SUMS`.\n")
     print(f"release files in {out}")
 
 

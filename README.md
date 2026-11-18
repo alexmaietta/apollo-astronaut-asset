@@ -1,6 +1,6 @@
 [![Latest release](https://img.shields.io/github/v/release/alexmaietta/apollo-astronaut-asset?label=release&sort=semver)](https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest)
-[![Code: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
-[![Additions: CC BY 4.0](https://img.shields.io/badge/rig%20%26%20physics-CC%20BY%204.0-lightgrey.svg)](assets/LICENSE)
+[![Code: BSD-3-Clause](https://img.shields.io/badge/code-BSD--3--Clause-blue.svg)](LICENSE)
+[![Additions: CC0 1.0](https://img.shields.io/badge/rig%20%26%20physics-CC0%201.0-lightgrey.svg)](assets/LICENSE)
 [![Source asset: NVIDIA Omniverse](https://img.shields.io/badge/source%20asset-NVIDIA%20Omniverse-76b900.svg?logo=nvidia&logoColor=white)](https://docs.omniverse.nvidia.com/composer/latest/prod_content/mount-content.html#astronaut)
 ![USD](https://img.shields.io/badge/format-OpenUSD%20%2F%20UsdSkel-6a5acd.svg)
 ![Blender](https://img.shields.io/badge/format-Blender-e87d0d.svg?logo=blender&logoColor=white)
@@ -23,7 +23,7 @@ What it adds to NVIDIA's model:
 
 ## Quick start
 
-Download the format you need (`astronaut-usd` or `astronaut-blend`) from the [latest release](https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest). To pin a version, use `download/v1.0.0` instead of `latest/download`. Each release includes `SHA256SUMS`.
+Download the format you need (`astronaut-usd` or `astronaut-blend`) from the [latest release](https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest). To pin a version, use `download/v1.1.0` instead of `latest/download`. Each release includes `SHA256SUMS`.
 
 ```sh
 curl -LO https://github.com/alexmaietta/apollo-astronaut-asset/releases/latest/download/astronaut-usd.zip
@@ -196,7 +196,7 @@ To cut a release:
 Copyright 2026 Alex Maietta (see [`NOTICE`](NOTICE)).
 
 - **Source asset.** The astronaut mesh, its MDL materials and its textures (`source/`, and the geometry and textures carried into `assets/`) are NVIDIA's [Omniverse Astronaut sample](https://docs.omniverse.nvidia.com/composer/latest/prod_content/mount-content.html#astronaut), © NVIDIA Corporation. They remain under NVIDIA's terms for Omniverse sample content (the [NVIDIA Omniverse License Agreement](https://docs.omniverse.nvidia.com/dev-overview/latest/common/NVIDIA_Omniverse_License_Agreement.html)) and are not relicensed here.
-- **Code** (`scripts/`, `examples/`, `pipeline.sh`): [Apache License 2.0](LICENSE).
-- **Additions to the asset** (the skeleton, skin weights, corrective blend shapes, physics hands, glove parameters and body colliders in `assets/`, plus `data/`) and the **renders** (`docs/images/`): [Creative Commons Attribution 4.0 International](assets/LICENSE). Credit: "Apollo astronaut rig by Alex Maietta, built on NVIDIA's Omniverse Astronaut sample".
+- **Code** (`scripts/`, `examples/`, `pipeline.sh`): [BSD 3-Clause License](LICENSE).
+- **Additions to the asset** (the skeleton, skin weights, corrective blend shapes, physics hands, glove parameters and body colliders in `assets/`, plus `data/`) and the **renders** (`docs/images/`): [CC0 1.0 Universal](assets/LICENSE), public domain. Attribution isn't required but is appreciated: "Apollo astronaut rig by Alex Maietta, built on NVIDIA's Omniverse Astronaut sample".
 
-The Newton examples are based on Newton's examples and are Apache-2.0, © The Newton Developers. The walk animation in `docs/images/walk.gif` uses motion data from the [CMU Graphics Lab Motion Capture Database](http://mocap.cs.cmu.edu), created with funding from NSF EIA-0196217; the raw data isn't included in this repository. This project is not affiliated with or endorsed by NVIDIA or NASA.
+The Newton example scripts (`examples/newton/example_astronaut_*.py`) are based on Newton's examples and stay under Apache-2.0, © The Newton Developers. The walk animation in `docs/images/walk.gif` uses motion data from the [CMU Graphics Lab Motion Capture Database](http://mocap.cs.cmu.edu), created with funding from NSF EIA-0196217; the raw data isn't included in this repository. This project is not affiliated with or endorsed by NVIDIA or NASA.

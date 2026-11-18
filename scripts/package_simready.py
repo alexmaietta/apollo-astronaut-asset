@@ -418,7 +418,7 @@ def write_metadata(out):
         "OpenXR joints, shoulder correctives, and 20-DoF physics hands with A7L glove stiffness.",
         "source": "https://omniverse-content-production.s3.us-west-2.amazonaws.com/Samples/Examples/2024_1/Rendering/Astronaut/",
         "author": "Alex Maietta", "asset_name": NAME, "asset_type": "character", "category": "humanoid",
-        "asset_license": "CC-BY-4.0 (rig, physics, additions); NVIDIA's Omniverse Astronaut mesh and textures under "
+        "asset_license": "CC0-1.0 (rig, physics, additions); NVIDIA's Omniverse Astronaut mesh and textures under "
         "NVIDIA's terms", "source_file": source_file, "usd_date_generated": today,
         "qcode": "Q11631",  # Wikidata "astronaut"
         "rigid_body_count": len(bodies), "asset_extents": Gf.Vec3f(*size), "mass": round(mass, 4),  # simulated bodies only
